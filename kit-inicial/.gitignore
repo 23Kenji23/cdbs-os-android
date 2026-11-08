@@ -1,0 +1,9 @@
+.env
+data/*
+!data/sites/
+data/sites/*
+!data/sites/.keep
+__pycache__/
+*.pyc
+loop.log
+PARAR

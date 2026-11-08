@@ -1,0 +1,17 @@
+.env
+data/admin.json
+data/sites/*
+!data/sites/.keep
+__pycache__/
+*.pyc
+data/catalogs/
+data/secret.key
+data/backups/
+data/restore-tmp/
+data/system/
+data/monitoring/
+data/notifications/
+data/updates/
+data/admin-sessions.json
+VERSION.json.tmp
+data/removidos/

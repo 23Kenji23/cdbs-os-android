@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8fc">
+  <meta name="description" content="Painel local para publicar sites estáticos no CDBS.OS.">
+  <title>CDBS.OS — Sites</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+  <script src="/backups.js" defer></script>
+  <script src="/ops.js" defer></script>
+  <script src="/system.js" defer></script>
+  <script src="/apps.js" defer></script>
+  <script src="/nav.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="CDBS.OS início">
+      <span class="brand-mark" aria-hidden="true">C</span>
+      <span><strong>CDBS<span>.OS</span></strong><small>Sites e servidores no celular</small></span>
+    </a>
+    <div class="header-actions">
+      <span class="local-badge"><i></i> Painel local</span>
+      <button id="logoutButton" class="logout-button" type="button" hidden>Sair</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="authView" class="auth-view" hidden>
+      <div class="auth-card">
+        <div class="eyebrow">ACESSO DO ADMINISTRADOR</div>
+        <h1 id="authTitle">Entre no CDBS.OS</h1>
+        <p id="authDescription">Acesse seu painel para gerenciar os sites.</p>
+        <form id="authForm">
+          <label for="password">Senha</label>
+          <input id="password" name="password" type="password" minlength="12" maxlength="256" autocomplete="current-password" required>
+          <div id="confirmGroup" hidden>
+            <label for="confirmPassword">Repita a senha</label>
+            <input id="confirmPassword" name="confirmPassword" type="password" minlength="12" maxlength="256" autocomplete="new-password">
+          </div>
+          <button id="authButton" class="button primary wide" type="submit">Entrar</button>
+          <p id="authHint" class="hint"></p>
+        </form>
+        <div id="authMessage" class="message" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="app-layout" hidden>
+      <nav class="side-nav" aria-label="Páginas do painel">
+        <a href="#inicio" data-page-link="inicio"><span class="nav-ico" aria-hidden="true">⌂</span><span class="nav-text">Início</span><span class="nav-badge" data-badge="inicio" hidden></span></a>
+        <a href="#sites" data-page-link="sites"><span class="nav-ico" aria-hidden="true">◫</span><span class="nav-text">Sites</span><span class="nav-badge" data-badge="sites" hidden></span></a>
+        <a href="#servidores" data-page-link="servidores"><span class="nav-ico" aria-hidden="true">▣</span><span class="nav-text">Servidores</span><span class="nav-badge" data-badge="servidores" hidden></span></a>
+        <a href="#lojas" data-page-link="lojas"><span class="nav-ico" aria-hidden="true">🛍</span><span class="nav-text">Lojas</span><span class="nav-badge" data-badge="lojas" hidden></span></a>
+        <a href="#backups" data-page-link="backups"><span class="nav-ico" aria-hidden="true">⛁</span><span class="nav-text">Backups</span><span class="nav-badge" data-badge="backups" hidden></span></a>
+        <a href="#avisos" data-page-link="avisos"><span class="nav-ico" aria-hidden="true">✉</span><span class="nav-text">Avisos</span><span class="nav-badge" data-badge="avisos" hidden></span></a>
+        <a href="#sistema" data-page-link="sistema"><span class="nav-ico" aria-hidden="true">⚙</span><span class="nav-text">Sistema</span><span class="nav-badge" data-badge="sistema" hidden></span></a>
+        <a href="#historico" data-page-link="historico"><span class="nav-ico" aria-hidden="true">☰</span><span class="nav-text">Histórico</span><span class="nav-badge" data-badge="historico" hidden></span></a>
+      </nav>
+      <div class="pages">
+      <div class="page" id="pg-inicio" data-page="inicio" hidden>
+        <header class="page-head"><div class="eyebrow">AGORA</div><h1>Início</h1><p>O que precisa da sua atenção, num lugar só.</p></header>
+      <section id="opOverview" class="panel op-panel" aria-labelledby="opOverviewTitle" hidden>
+        <div class="panel-heading">
+          <div><div class="eyebrow">AGORA</div><h2 id="opOverviewTitle">Visão geral</h2></div>
+          <button id="opRefresh" class="button secondary" type="button">Atualizar</button>
+        </div>
+        <div id="opCards" class="op-cards" aria-live="polite"></div>
+        <div id="opProblems" class="op-problems"></div>
+      </section>
+      <section id="stStorage" class="panel op-panel" aria-labelledby="stTitle" hidden>
+        <div class="panel-heading">
+          <div><div class="eyebrow">ESPAÇO</div><h2 id="stTitle">Armazenamento</h2></div>
+          <button id="stRefresh" class="button secondary" type="button">Medir de novo</button>
+        </div>
+        <div id="stBar" class="st-bar" aria-hidden="true"></div>
+        <p id="stSummary" class="hint-text">—</p>
+        <div id="stParts" class="st-parts"></div>
+        <details class="op-details"><summary>Por site e por servidor</summary><div id="stDetail" class="st-detail"></div></details>
+      </section>
+      </div>
+
+      <div class="page" id="pg-sites" data-page="sites" hidden>
+        <header class="page-head"><div class="eyebrow">PUBLICAÇÃO</div><h1>Sites</h1><p>Publique, acompanhe e organize as 20 posições de site.</p></header>
+      <section id="opSlots" class="panel op-panel" aria-labelledby="opSlotsTitle" hidden>
+        <div class="panel-heading">
+          <div><div class="eyebrow">MONITORAMENTO</div><h2 id="opSlotsTitle">Posições de site</h2></div>
+          <button id="opCheckAll" class="button primary" type="button">Verificar todas agora</button>
+        </div>
+        <p id="opSlotsInfo" class="hint-text"></p>
+        <div id="opSlotsWarn" class="bk-warning" hidden></div>
+        <div id="opSlotsMessage" class="message" role="status" aria-live="polite"></div>
+        <ol id="opSlotList" class="slot-list"></ol>
+        <details class="op-details">
+          <summary>Configurar o monitoramento</summary>
+          <form id="opMonitorForm" class="op-form">
+            <div class="field"><label for="opMonInterval">Verificar e mandar o relatório</label>
+              <select id="opMonInterval">
+                <option value="15">a cada 15 minutos</option>
+                <option value="30">a cada 30 minutos (padrão)</option>
+                <option value="60">a cada 1 hora</option>
+                <option value="120">a cada 2 horas</option>
+                <option value="180">a cada 3 horas</option>
+                <option value="360">a cada 6 horas</option>
+                <option value="720">a cada 12 horas</option>
+                <option value="1440">uma vez por dia</option>
+                <option value="off">desligado (só quando eu pedir "Verificar")</option>
+              </select>
+              <small id="opMonIntervalHint">Com WhatsApp, cada relatório é uma mensagem cobrada pela Meta: intervalo maior gasta menos.</small></div>
+            <label class="bk-check"><input id="opMonPublic" type="checkbox"> Testar também pelo link público (túnel ou endereço fixo)</label>
+            <button class="button secondary" type="submit">Salvar monitoramento</button>
+            <p id="opMonitorMsg" class="message" role="status"></p>
+          </form>
+        </details>
+      </section>
+      <section id="secSites" class="panel upload-panel" aria-labelledby="uploadTitle">
+        <div class="panel-heading">
+          <div><div class="eyebrow">NOVO SITE</div><h2 id="uploadTitle">Adicionar site</h2></div>
+          <span class="step-badge">ZIP</span>
+        </div>
+        <form id="uploadForm" class="upload-form">
+          <div class="field-row">
+            <div class="field grow">
+              <label for="siteSlug">Nome do site</label>
+              <input id="siteSlug" name="slug" maxlength="32" autocomplete="off" placeholder="ex: minha-loja" pattern="[a-z0-9][a-z0-9\-]{0,30}[a-z0-9]|[a-z0-9]" required>
+              <small>Será usado no endereço do site.</small>
+            </div>
+            <div class="field grow file-field">
+              <label for="siteZip">Arquivo do site</label>
+              <input id="siteZip" name="siteZip" type="file" accept=".zip,application/zip" required>
+              <small>ZIP de até 60 MB, com <code>index.html</code>.</small>
+            </div>
+          </div>
+          <div class="upload-actions">
+            <p>Sites estáticos: HTML, CSS, JavaScript e imagens. Programas (Python/Node.js) vão em <a href="#servidores">Servidores</a>.</p>
+            <button id="uploadButton" class="button primary" type="submit">Publicar site</button>
+          </div>
+        </form>
+        <div id="uploadMessage" class="message" role="status" aria-live="polite"></div>
+      </section>
+      <section class="sites-section" aria-labelledby="sitesTitle">
+        <div class="section-heading"><div><div class="eyebrow">PAINEL</div><h2 id="sitesTitle">Seus sites</h2></div><span id="siteCount" class="count-badge">0</span></div>
+        <div id="sitesList" class="sites-list"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <span class="empty-icon" aria-hidden="true">＋</span>
+          <strong>Nenhum site publicado</strong>
+          <p>Envie um arquivo ZIP acima para começar.</p>
+        </div>
+        <details id="removedBox" class="op-details" hidden>
+          <summary id="removedSummary">Sites removidos (guardados)</summary>
+          <p class="hint-text">Remover um site não apaga os arquivos: eles ficam guardados aqui, fora do ar e fora do túnel, até você recuperar ou apagar de vez. Também serve para voltar à versão anterior de um site: remova a atual (ela também fica guardada) e recupere a antiga.</p>
+          <ul id="removedList" class="op-events"></ul>
+          <p id="removedMessage" class="message" role="status" aria-live="polite"></p>
+        </details>
+      </section>
+      <p id="publicNotice" class="notice"></p>
+      </div>
+
+      <div class="page" id="pg-servidores" data-page="servidores" data-single hidden>
+        <header class="page-head"><div class="eyebrow">APLICATIVOS</div><h1>Servidores</h1><p>Até 5 programas rodando junto com os sites — inclusive coisas que não são estáticas.</p></header>
+      <section id="appsSection" class="panel op-panel" aria-labelledby="appsTitle" hidden>
+        <div class="panel-heading">
+          <div><div class="eyebrow">APLICATIVOS</div><h2 id="appsTitle">Servidores</h2></div>
+          <span id="appsCount" class="count-badge">0/5</span>
+        </div>
+        <p class="hint-text">Um servidor é um programa seu (Python ou Node.js) que fica rodando e responde no endereço <code>/NOME/</code>, pelo mesmo túnel dos sites. O guardião liga, vigia e reinicia; se uma versão nova não responder, a anterior volta sozinha. Guia completo: <code>docs/SERVIDORES.md</code>.</p>
+        <div id="appsNote" class="bk-warning" hidden></div>
+        <div id="appsMessage" class="message" role="status" aria-live="polite"></div>
+        <div id="appsList" class="apps-list"></div>
+        <details id="appsCreateBox" class="op-details">
+          <summary>Criar servidor</summary>
+          <form id="appsCreateForm" class="op-form">
+            <div class="field-row">
+              <div class="field grow"><label for="appName">Nome (vira o endereço /nome/)</label><input id="appName" maxlength="32" autocomplete="off" placeholder="ex: api-loja" required pattern="[a-z0-9][a-z0-9\-]{0,30}[a-z0-9]|[a-z0-9]"></div>
+              <div class="field grow"><label for="appRuntime">Tipo</label><select id="appRuntime"><option value="python">Python 3</option><option value="node">Node.js</option></select></div>
+            </div>
+            <div class="field-row">
+              <div class="field grow"><label for="appEntry">Arquivo que inicia o programa</label><input id="appEntry" maxlength="120" autocomplete="off" placeholder="app.py" required><small>Caminho dentro do ZIP. Ex.: app.py, server.js, src/index.js</small></div>
+              <div class="field grow"><label for="appHealth">Caminho de saúde (opcional)</label><input id="appHealth" maxlength="120" autocomplete="off" placeholder="/saude"><small>Deve responder 200. Vazio = só confere se a porta responde.</small></div>
+            </div>
+            <div class="field"><label for="appDesc">Descrição (opcional)</label><input id="appDesc" maxlength="120" autocomplete="off" placeholder="ex: API de pedidos da loja"></div>
+            <button class="button primary" type="submit">Criar servidor</button>
+            <p id="appsCreateMsg" class="message" role="status"></p>
+          </form>
+        </details>
+      </section>
+      </div>
+
+      <div class="page" id="pg-lojas" data-page="lojas" data-single hidden>
+        <header class="page-head"><div class="eyebrow">CATÁLOGO</div><h1>Lojas</h1><p>Catálogo dos clientes: cada loja cadastra os próprios produtos.</p></header>
+      <section id="secCatalogo" class="panel store-panel" aria-labelledby="storesTitle">
+        <div class="panel-heading">
+          <div><div class="eyebrow">CATÁLOGO</div><h2 id="storesTitle">Catálogo dos clientes</h2></div>
+          <span id="storeCount" class="count-badge">0</span>
+        </div>
+        <p class="hint-text">O cliente cadastra os próprios produtos num painel com senha, que abre por cima do próprio site por um botão escondido (5 toques no logo). Os seus HTMLs leem a lista em <code>/_api/NOME/products.json</code>, então você não precisa mexer a cada produto novo.</p>
+        <form id="storeForm" class="upload-form">
+          <div class="field-row">
+            <div class="field grow">
+              <label for="storeSlug">Nome (o mesmo do site)</label>
+              <input id="storeSlug" name="storeSlug" maxlength="32" autocomplete="off" list="siteNames" placeholder="ex: adega" required>
+              <datalist id="siteNames"></datalist>
+            </div>
+            <div class="field grow">
+              <label for="storeName">Nome da loja</label>
+              <input id="storeName" name="storeName" maxlength="60" autocomplete="off" placeholder="ex: Adega do Zé" required>
+            </div>
+            <div class="field grow">
+              <label for="storeWhatsapp">WhatsApp da loja</label>
+              <input id="storeWhatsapp" name="storeWhatsapp" inputmode="tel" maxlength="20" autocomplete="off" placeholder="(85) 99999-9999">
+            </div>
+          </div>
+          <div class="upload-actions">
+            <p>Gera uma senha para o cliente. Ela aparece uma vez só.</p>
+            <button id="storeButton" class="button primary" type="submit">Ativar catálogo</button>
+          </div>
+        </form>
+        <div id="storeMessage" class="message" role="status" aria-live="polite"></div>
+        <div id="credentialBox" class="credential" hidden>
+          <strong>Acesso do cliente — guarde agora, a senha não aparece de novo</strong>
+          <div class="credential-line"><span>Link direto</span><code id="credUrl"></code></div>
+          <div class="credential-line"><span>Loja</span><code id="credSlug"></code></div>
+          <div class="credential-line"><span>Senha</span><code id="credPassword"></code></div>
+          <button id="credCopy" class="button secondary" type="button">Copiar mensagem para o cliente</button>
+        </div>
+        <div id="storesList" class="sites-list"></div>
+        <p id="clientNotice" class="notice"></p>
+      </section>
+      </div>
+
+      <div class="page" id="pg-backups" data-page="backups" data-single hidden>
+        <header class="page-head"><div class="eyebrow">SEGURANÇA</div><h1>Backups</h1><p>Cópias conferidas e criptografadas de cada loja.</p></header>
+      <section id="bkSection" class="panel store-panel" aria-labelledby="bkTitle" hidden>
+        <div class="panel-heading">
+          <div><div class="eyebrow">SEGURANÇA</div><h2 id="bkTitle">Central de backups</h2></div>
+        </div>
+        <p class="hint-text">Guarda uma cópia conferida e criptografada do site e do catálogo de cada loja (produtos e fotos; a senha do cliente nunca entra). Você pode voltar uma loja a uma cópia anterior sem medo: antes de trocar qualquer coisa o CDBS salva o estado atual e, se algo falhar, recoloca a versão anterior. Uma loja removida também pode ser recuperada, mas volta desativada até você gerar uma nova senha.</p>
+        <div id="bkAlert" class="bk-alert" role="alert" hidden></div>
+        <div id="bkProtection" class="bk-protect"></div>
+        <div id="bkMessage" class="message" role="status" aria-live="polite"></div>
+        <div id="bkStores" class="bk-stores"></div>
+        <div id="bkDetail" class="bk-detail" hidden></div>
+        <div id="bkRetention" class="bk-storage"></div>
+        <div id="bkStorage" class="bk-storage"></div>
+        <div id="bkReminder" class="bk-storage"></div>
+      </section>
+      </div>
+
+      <div class="page" id="pg-avisos" data-page="avisos" data-single hidden>
+        <header class="page-head"><div class="eyebrow">NOTIFICAÇÕES</div><h1>Avisos</h1><p>WhatsApp, e-mail e bot de comandos.</p></header>
+      <section id="sysNotifications" class="panel op-panel" aria-labelledby="sysNotifTitle" hidden>
+        <div class="panel-heading">
+          <div><div class="eyebrow">AVISOS</div><h2 id="sysNotifTitle">Notificações e WhatsApp</h2></div>
+        </div>
+        <p class="hint-text">Todo evento importante fica primeiro no histórico local. Com o WhatsApp configurado (API oficial da Meta), o relatório das posições e os alertas também vão para o seu número. Configurar exige conta na Meta, número de envio e modelos aprovados — veja <code>docs/WHATSAPP.md</code>.</p>
+        <div id="sysNotifStatus" class="bk-protect"></div>
+        <div class="op-row-actions">
+          <button id="sysPreview" class="button secondary" type="button">Pré-visualizar relatório</button>
+          <button id="sysTest" class="button secondary" type="button">Enviar mensagem de teste</button>
+        </div>
+        <pre id="sysPreviewBox" class="op-pre" hidden></pre>
+        <div id="sysNotifMessage" class="message" role="status" aria-live="polite"></div>
+        <details class="op-details" open>
+          <summary>Destinatários e preferências</summary>
+          <form id="sysNotifForm" class="op-form">
+            <label class="bk-check"><input id="sysNotifEnabled" type="checkbox"> Enviar pelo WhatsApp</label>
+            <div class="field"><label for="sysRecipients">Números que recebem (formato internacional, separados por vírgula)</label>
+              <input id="sysRecipients" autocomplete="off" inputmode="tel" placeholder="+55 85 90000-0000"><small id="sysRecipientsNow"></small></div>
+            <label class="bk-check"><input id="sysReportEnabled" type="checkbox"> Relatório periódico das posições de site</label>
+            <label class="bk-check"><input id="sysAlertsEnabled" type="checkbox"> Alertas (queda, volta, túnel, servidores, atualização, backup, pouco espaço)</label>
+            <div class="field"><label for="sysCooldown">Espera mínima entre alertas repetidos (minutos)</label><input id="sysCooldown" type="number" min="5" max="1440"></div>
+            <div class="field"><label for="sysTplReport">Modelo (template) do relatório</label><input id="sysTplReport" autocomplete="off" spellcheck="false"></div>
+            <div class="field"><label for="sysTplReportVars">Variáveis do modelo do relatório</label>
+              <select id="sysTplReportVars"><option value="12">12 — duas posições por linha (modelo completo)</option><option value="3">3 — resumo e posições com problema (modelo curto)</option></select>
+              <small>Tem que ser igual ao modelo aprovado na Meta. Os dois textos estão em docs/WHATSAPP.md.</small></div>
+            <div class="field"><label for="sysTplAlert">Modelo (template) dos alertas</label><input id="sysTplAlert" autocomplete="off" spellcheck="false"></div>
+            <div class="field"><label for="sysTplLang">Idioma dos modelos</label><input id="sysTplLang" autocomplete="off" spellcheck="false"></div>
+            <div class="field"><label for="sysApiVersion">Versão da API da Meta</label><input id="sysApiVersion" autocomplete="off" spellcheck="false"></div>
+            <button class="button secondary" type="submit">Salvar preferências</button>
+            <p id="sysNotifFormMsg" class="message" role="status"></p>
+          </form>
+        </details>
+        <details class="op-details">
+          <summary>Credenciais da API (só gravação: nunca são mostradas de volta)</summary>
+          <div id="sysSecrets" class="op-secrets"></div>
+          <div class="op-kv"><span>Endereço do webhook para a Meta</span><code id="sysWebhookUrl">—</code></div>
+          <p id="sysWebhookNote" class="hint"></p>
+          <p id="sysSecretsMsg" class="message" role="status"></p>
+        </details>
+        <details class="op-details">
+          <summary>Bot de comandos (!Link, !Status…)</summary>
+          <form id="sysBotForm" class="op-form">
+            <label class="bk-check"><input id="sysBotEnabled" type="checkbox"> Aceitar comandos pelo WhatsApp</label>
+            <div class="field"><label for="sysBotAdmins">Números que podem CONSULTAR e AGIR (formato internacional, vírgula)</label><input id="sysBotAdmins" autocomplete="off" inputmode="tel"><small id="sysBotAdminsNow"></small></div>
+            <div class="field"><label for="sysBotViewers">Números que só podem CONSULTAR</label><input id="sysBotViewers" autocomplete="off" inputmode="tel"><small id="sysBotViewersNow"></small></div>
+            <label class="bk-check"><input id="sysBotInteractive" type="checkbox"> Usar listas e botões do WhatsApp (se falhar, o menu vai em texto numerado)</label>
+            <button class="button secondary" type="submit">Salvar bot</button>
+            <p id="sysBotMsg" class="message" role="status"></p>
+          </form>
+        </details>
+        <details class="op-details" id="sysMailBox">
+          <summary>E-mail (opcional — usa o seu e-mail, sem conta na Meta)</summary>
+          <p class="hint-text">Os mesmos avisos (relatório das posições e alertas) também podem ir para o seu e-mail. No Gmail: ligue a verificação em duas etapas e crie uma <strong>senha de app</strong> (veja <code>docs/EMAIL.md</code>); a senha normal do Gmail não funciona aqui.</p>
+          <form id="sysMailForm" class="op-form">
+            <label class="bk-check"><input id="sysMailEnabled" type="checkbox"> Enviar avisos por e-mail</label>
+            <div class="field"><label for="sysMailPreset">Provedor</label>
+              <select id="sysMailPreset"><option value="gmail">Gmail</option><option value="outro">Outro (preencho os dados SMTP)</option></select></div>
+            <div class="field"><label for="sysMailUser">Seu e-mail (usuário que envia)</label><input id="sysMailUser" type="email" autocomplete="off" spellcheck="false" placeholder="voce@gmail.com"></div>
+            <div class="field"><label for="sysMailPassword">Senha de app do e-mail (só gravação)</label><input id="sysMailPassword" type="password" autocomplete="new-password" spellcheck="false" placeholder="não configurada"><small id="sysMailPasswordNow"></small></div>
+            <div class="field"><label for="sysMailTo">E-mails que recebem (vírgula)</label><input id="sysMailTo" autocomplete="off" spellcheck="false" placeholder="voce@gmail.com"><small id="sysMailToNow"></small></div>
+            <div id="sysMailAdvanced">
+              <div class="field"><label for="sysMailHost">Servidor SMTP</label><input id="sysMailHost" autocomplete="off" spellcheck="false" placeholder="smtp.seuprovedor.com"></div>
+              <div class="field"><label for="sysMailPort">Porta</label><input id="sysMailPort" type="number" min="1" max="65535"></div>
+              <div class="field"><label for="sysMailSecurity">Segurança</label>
+                <select id="sysMailSecurity"><option value="ssl">SSL (normalmente porta 465)</option><option value="starttls">STARTTLS (normalmente porta 587)</option></select></div>
+              <div class="field"><label for="sysMailFrom">Remetente (vazio = o seu e-mail)</label><input id="sysMailFrom" type="email" autocomplete="off" spellcheck="false"></div>
+            </div>
+            <div class="op-row-actions">
+              <button class="button secondary" type="submit">Salvar e-mail</button>
+              <button id="sysMailTest" class="button secondary" type="button">Enviar e-mail de teste</button>
+            </div>
+            <p id="sysMailMsg" class="message" role="status"></p>
+          </form>
+        </details>
+        <h3 class="op-sub">Últimas notificações</h3>
+        <ul id="sysNotifList" class="op-events"></ul>
+      </section>
+      </div>
+
+      <div class="page" id="pg-sistema" data-page="sistema" data-single hidden>
+        <header class="page-head"><div class="eyebrow">SISTEMA</div><h1>Sistema</h1><p>Servidor do CDBS, túnel Cloudflare e atualizações.</p></header>
+      <section id="sysSystem" class="panel op-panel" aria-labelledby="sysSystemTitle" hidden>
+        <div class="panel-heading">
+          <div><div class="eyebrow">SISTEMA</div><h2 id="sysSystemTitle">Servidor do CDBS, túnel e atualizações</h2></div>
+        </div>
+        <div id="sysSupervisor" class="bk-protect"></div>
+        <div class="op-grid">
+          <div class="op-box">
+            <h3>Servidor</h3>
+            <p id="sysServerState" class="op-state-line">—</p>
+            <button id="sysRestart" class="button danger" type="button">Reiniciar servidor</button>
+          </div>
+          <div class="op-box">
+            <h3>Túnel Cloudflare</h3>
+            <p id="sysTunnelState" class="op-state-line">—</p>
+            <div class="op-row-actions">
+              <button id="sysTunnelStart" class="button secondary" type="button">Ligar</button>
+              <button id="sysTunnelRestart" class="button secondary" type="button">Reiniciar</button>
+              <button id="sysTunnelStop" class="button danger" type="button">Desligar</button>
+            </div>
+            <form id="sysTunnelForm" class="op-form compact">
+              <div class="field"><label for="sysTunnelMode">Modo</label>
+                <select id="sysTunnelMode"><option value="quick">Quick Tunnel (link temporário, grátis)</option><option value="named">Túnel nomeado (endereço fixo, precisa de token)</option><option value="off">Desligado</option></select></div>
+              <label class="bk-check"><input id="sysTunnelAuto" type="checkbox"> Ligar o túnel junto com o CDBS</label>
+              <button class="button secondary" type="submit">Salvar túnel</button>
+            </form>
+          </div>
+        </div>
+        <div id="sysOpMessage" class="message" role="status" aria-live="polite"></div>
+        <h3 class="op-sub">Atualizações</h3>
+        <p id="sysVersion" class="hint-text">—</p>
+        <form id="sysUpdateForm" class="bk-import">
+          <label for="sysUpdateFile">Pacote de atualização (.zip)</label>
+          <div class="bk-import-row"><input id="sysUpdateFile" type="file" accept=".zip,application/zip"><button class="button primary" type="submit">Enviar e conferir</button></div>
+        </form>
+        <div id="sysUpdateMsg" class="message" role="status" aria-live="polite"></div>
+        <div id="sysUpdateJournal" class="op-journal" hidden></div>
+        <div id="sysStaged" class="op-staged"></div>
+        <h3 class="op-sub">Versões guardadas (para voltar atrás)</h3>
+        <ul id="sysSnapshots" class="op-events"></ul>
+        <h3 class="op-sub">Histórico de atualizações</h3>
+        <ul id="sysUpdateHistory" class="op-events"></ul>
+      </section>
+      </div>
+
+      <div class="page" id="pg-historico" data-page="historico" data-single hidden>
+        <header class="page-head"><div class="eyebrow">AUDITORIA</div><h1>Histórico</h1><p>Tudo o que aconteceu, com filtros.</p></header>
+      <section id="opEvents" class="panel op-panel" aria-labelledby="opEventsTitle" hidden>
+        <div class="panel-heading">
+          <div><div class="eyebrow">AUDITORIA</div><h2 id="opEventsTitle">Histórico de eventos</h2></div>
+        </div>
+        <form id="opEventsFilter" class="op-filters">
+          <div class="field"><label for="opEvCategory">Categoria</label><select id="opEvCategory"><option value="">Todas</option></select></div>
+          <div class="field"><label for="opEvResult">Resultado</label><select id="opEvResult"><option value="">Todos</option></select></div>
+          <div class="field grow"><label for="opEvText">Texto</label><input id="opEvText" autocomplete="off" maxlength="60" placeholder="ex.: adega"></div>
+          <button class="button secondary" type="submit">Filtrar</button>
+        </form>
+        <ul id="opEventList" class="op-events"></ul>
+      </section>
+      </div>
+
+      </div>
+
+      <dialog id="opConfirmDialog" class="bk-dialog" aria-labelledby="opConfirmTitle">
+        <h3 id="opConfirmTitle">Confirmar</h3>
+        <p id="opConfirmText"></p>
+        <div class="field" id="opConfirmField" hidden>
+          <label for="opConfirmInput" id="opConfirmLabel">Digite para confirmar</label>
+          <input id="opConfirmInput" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40">
+        </div>
+        <label class="bk-check" id="opConfirmExtra" hidden><input id="opConfirmExtraBox" type="checkbox"> <span id="opConfirmExtraText"></span></label>
+        <div class="bk-dialog-actions">
+          <button id="opConfirmCancel" class="button secondary" type="button">Cancelar</button>
+          <button id="opConfirmOk" class="button danger" type="button">Confirmar</button>
+        </div>
+      </dialog>
+
+      <dialog id="bkRestoreDialog" class="bk-dialog" aria-labelledby="bkDialogTitle">
+        <h3 id="bkDialogTitle">Restaurar backup</h3>
+        <div id="bkRestoreBody"></div>
+        <div class="field" id="bkPasswordField" hidden>
+          <label for="bkRestorePassword">Senha de recuperação</label>
+          <input id="bkRestorePassword" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="256">
+        </div>
+        <label class="bk-check" id="bkRecreateField" hidden><input id="bkRecreateAck" type="checkbox"> Entendo que a loja volta DESATIVADA e SEM senha, e que o cliente só entra depois que eu gerar uma nova senha.</label>
+        <div class="field">
+          <label for="bkConfirmInput">Nome da loja para confirmar</label>
+          <input id="bkConfirmInput" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="40">
+        </div>
+        <p id="bkDialogMessage" class="message error" role="alert"></p>
+        <div class="bk-dialog-actions">
+          <button id="bkCancelBtn" class="button secondary" type="button">Cancelar</button>
+          <button id="bkConfirmBtn" class="button danger" type="button" disabled>Restaurar agora</button>
+        </div>
+      </dialog>
+
+      <dialog id="bkPasswordDialog" class="bk-dialog" aria-labelledby="bkPasswordTitle">
+        <h3 id="bkPasswordTitle">Senha de recuperação</h3>
+        <p id="bkPasswordText"></p>
+        <div class="field">
+          <label for="bkPasswordInput">Senha de recuperação</label>
+          <input id="bkPasswordInput" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="256">
+        </div>
+        <p id="bkPasswordMsg" class="message error" role="alert"></p>
+        <div class="bk-dialog-actions">
+          <button id="bkPasswordCancel" class="button secondary" type="button">Cancelar</button>
+          <button id="bkPasswordSkip" class="button secondary" type="button" hidden></button>
+          <button id="bkPasswordOk" class="button primary" type="button" disabled>Continuar</button>
+        </div>
+      </dialog>
+
+      <dialog id="bkDeleteDialog" class="bk-dialog" aria-labelledby="bkDeleteTitle">
+        <h3 id="bkDeleteTitle">Excluir backup</h3>
+        <div id="bkDeleteBody"></div>
+        <label class="bk-check" id="bkDeleteLastField" hidden><input id="bkDeleteLastAck" type="checkbox"> Sei que este é o ÚLTIMO backup validado desta loja e quero excluí-lo mesmo assim.</label>
+        <div class="field">
+          <label for="bkDeleteInput">Identificador do backup para confirmar</label>
+          <input id="bkDeleteInput" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="12">
+        </div>
+        <p id="bkDeleteMsg" class="message error" role="alert"></p>
+        <div class="bk-dialog-actions">
+          <button id="bkDeleteCancel" class="button secondary" type="button">Cancelar</button>
+          <button id="bkDeleteBtn" class="button danger" type="button" disabled>Excluir definitivamente</button>
+        </div>
+      </dialog>
+
+    </section>
+  </main>
+
+  <footer class="footer"><span>CDBS.OS</span><span>Painel local · nunca vai para a internet</span></footer>
+</body>
+</html>

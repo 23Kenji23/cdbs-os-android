@@ -1,0 +1,416 @@
+{
+ "name": "CDBS.OS",
+ "version": "4.0.0",
+ "released": "2026-11-02",
+ "data_format": 1,
+ "files": {
+  ".gitignore": {
+   "sha256": "7588060cb5d9f5da69c9953eff46873bca29d6ede49bf9575c84e69f8d6a9b9d",
+   "size": 256
+  },
+  "README.md": {
+   "sha256": "0e03619b9a1b9068bd0df0f02c4675c07bd770e406b1b427e20eaa326f93ec71",
+   "size": 3632
+  },
+  "apps.py": {
+   "sha256": "9e58c578c6d6d4a8872639d4e18634d03de5583f64957226014161ab3de6a501",
+   "size": 47296
+  },
+  "atualizar.sh": {
+   "sha256": "5d1a03d299b7017846935d55ef661322230f2c0347800e4df10027a0206214e0",
+   "size": 10101
+  },
+  "audit.py": {
+   "sha256": "1603242739d0858180fba7d7076c4753e8286f0f57845d9f04eb78384383a9c8",
+   "size": 5953
+  },
+  "backup.py": {
+   "sha256": "1a5c9a6db2334792e0283f64e61a919ca723fd99a676287b7f2b325083d92dcd",
+   "size": 115204
+  },
+  "backup_crypto.py": {
+   "sha256": "6d8c790abd2236a5e61de7d99041d93a3030c2374e5acff58f9599a82070d588",
+   "size": 12359
+  },
+  "bot.py": {
+   "sha256": "f306e6a0d46a8ee3a84f55fcdb8a67e6b782cfaaf5892213c3064ffa54d0ec37",
+   "size": 30379
+  },
+  "catalog.py": {
+   "sha256": "37f7a08faa80461fbac228750d254e29497d13681a62dab1f9ef085f81eabfcd",
+   "size": 20297
+  },
+  "cdbs.py": {
+   "sha256": "8b10671895078d7e0a0dfdf34c9877770a9786180bb6ad12295566220b31e8c5",
+   "size": 103862
+  },
+  "client/app.css": {
+   "sha256": "b6c8ec2fbd85f16918300f56c687d69007c380c06111a83c66de703c66003dc6",
+   "size": 4272
+  },
+  "client/app.js": {
+   "sha256": "07a0d5857849afa8417acb92a14b92ed29660e103badbdb553d00aa55562dfe3",
+   "size": 12215
+  },
+  "client/index.html": {
+   "sha256": "e5a6113ed09a37c70e278c1f4ecf9efc47fc7fa364db18759bfc156521a5cf45",
+   "size": 4276
+  },
+  "config/.env.example": {
+   "sha256": "5385d1489dbbd68c73dd289c516ed04dfdaaf36c116b9fae692db0dce6f15571",
+   "size": 2672
+  },
+  "config.py": {
+   "sha256": "ce1821de78dd260478b3887e11f1cc1d4bb7f5d6be6593bdcf2bc636ad923830",
+   "size": 3837
+  },
+  "control.py": {
+   "sha256": "d251bf54afca9a7eac0a650d57a5eaaa51ab2488399fe6b1a86ad2be3d6684c9",
+   "size": 5438
+  },
+  "data/sites/.keep": {
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "size": 1
+  },
+  "diagnostico.sh": {
+   "sha256": "5a9b4cf247014332ac72c50c946fac9d4373354b4bea25bf03df8a3b12c0c870",
+   "size": 863
+  },
+  "docs/ANDROID.md": {
+   "sha256": "3b86ad02d5e970407ae78ac4991a3ca9cd5f18d0fadc1fba420cab21e5d4bcbe",
+   "size": 5930
+  },
+  "docs/ARQUITETURA-3.0.md": {
+   "sha256": "cdf323820efc0d4d3b83e2999c1793e34bb444d25d1396f836c916e37851e85e",
+   "size": 23112
+  },
+  "docs/ARQUITETURA-4.0.md": {
+   "sha256": "435aaf41a686af03926891152d2378e1da598c406b8d802db7c85330b140d16d",
+   "size": 7251
+  },
+  "docs/ATUALIZACOES.md": {
+   "sha256": "db0e7175876ba0a6f698022fc3ce1591923efd1573cc6e44f571318bb4b40604",
+   "size": 8117
+  },
+  "docs/AUDITORIA-2.1.md": {
+   "sha256": "660c3d3b217e262bd4135ed6055ff4de7fb4b0c8aac5a8da6a3fe737399a2f6f",
+   "size": 4611
+  },
+  "docs/AUDITORIA-BACKUP.md": {
+   "sha256": "9856d0a2ce822ad214e44c84ddcfbac52104c95046d1a84d17b165d041058d5b",
+   "size": 5928
+  },
+  "docs/BACKUP.md": {
+   "sha256": "2ed176a312749ea4855d6dc38ed52ded62dcbbc953851088ae83fc09d9275755",
+   "size": 8581
+  },
+  "docs/BOT.md": {
+   "sha256": "2eeeb59a1819f7b8c1e554828a79203d8a1cc0384d91d5dc854345c8c482b52f",
+   "size": 7475
+  },
+  "docs/CRIPTOGRAFIA.md": {
+   "sha256": "59f6048e43937e816c7221d6171a985fe70c8a31e52377f85d3fd0dcd6456c1d",
+   "size": 5060
+  },
+  "docs/EMAIL.md": {
+   "sha256": "4f8aeb05641eebd8442d1d3262fa507f955e747c9c84387640715fe5bb6752af",
+   "size": 4366
+  },
+  "docs/GUIA-ORIGINAL.md": {
+   "sha256": "ed98e10418dba2ef2a1a3416b0a6e6c074b18b96c0f1c29059f3b6cbee6a8ebb",
+   "size": 25246
+  },
+  "docs/INVENTARIO.md": {
+   "sha256": "03556a4121dd5aae1286d6b4a8c0cf701a45a1899c6df7e5ca82eee06e1b207f",
+   "size": 6870
+  },
+  "docs/MONITORAMENTO.md": {
+   "sha256": "4867a9f0a3d8497a196b32f2f6d4b6d7f578f9336366d44f410529b667796155",
+   "size": 8236
+  },
+  "docs/SERVIDORES.md": {
+   "sha256": "0e458c35f28e148f1d4dee3d58c84a7d56b7e89b593942e51d6cd293d1a72dfd",
+   "size": 9094
+  },
+  "docs/TERMUX.md": {
+   "sha256": "07e2fbcdc39824b5f0abdbdb383239a0e57d18e95734a1109f4d77e366d616cf",
+   "size": 13435
+  },
+  "docs/WHATSAPP.md": {
+   "sha256": "a2043d11bc116c0beb961e6d53b8892e14203c6f6b7f411966550fa369862f37",
+   "size": 15577
+  },
+  "docs/exemplo-catalogo.html": {
+   "sha256": "247da3f8057b6690e60678f0bdc2f687e6ba470d410e672e1e044a6d4262b7c7",
+   "size": 4548
+  },
+  "docs/exemplos/servidor-node/server.js": {
+   "sha256": "340259b5924e03c5beb1717170ccf419cbc92dc3e77b6f054ade9b2ce54a0126",
+   "size": 2132
+  },
+  "docs/exemplos/servidor-python/app.py": {
+   "sha256": "216fbf523356a98387f93d3f8b3be9d92dabf2e98f409ac255dbf731dae09d4b",
+   "size": 3882
+  },
+  "docs/updates/ATUALIZACAO-CDBS-SISTEMA-NOTIFICACOES.md": {
+   "sha256": "30083abc8abaafb64c996b1b3e049f4f9fbbc65e45782fba5e8b39c46dd5ed78",
+   "size": 13638
+  },
+  "docs/updates/ATUALIZACAO-CDBSOS-ATUALIZADOR-PELO-PAINEL.md": {
+   "sha256": "bb0d398983a8e20b81dda626d2df90df989cf2de9b3ffc3d834c5cd3844e64bc",
+   "size": 9676
+  },
+  "docs/updates/ATUALIZACAO-CDBSOS-MONITORAMENTO-WHATSAPP.md": {
+   "sha256": "7256fabb04dd172de07363c69429d4c40f5f0be71268792c5b457f2440685e1c",
+   "size": 25002
+  },
+  "docs/updates/ATUALIZACAO-CDBSOS-TESTES-BOT-WHATSAPP.md": {
+   "sha256": "9fa1e64e02b9530d9601e11fd9be06029b30d524eb5b6833e0065811561e9aef",
+   "size": 10381
+  },
+  "docs/updates/PLANO-MESTRE-CDBSOS-PARTES-1-2-3.md": {
+   "sha256": "a297b0bec6c82cbd38da69071ed65ca126872e79d044526667b30aafb944ef17",
+   "size": 77039
+  },
+  "docs/updates/README.md": {
+   "sha256": "aa4290d559fbc68335987cb861cf67cf6704bb652ef50c2d04914437e6c2a28e",
+   "size": 1966
+  },
+  "doctor.py": {
+   "sha256": "b39cc8d23e0737ebdfda5b4810aeb6d4b50a47be97faabfa67648a8c2d93128a",
+   "size": 23797
+  },
+  "emailer.py": {
+   "sha256": "3506f674ec835af7f827028b3149c6e5d4ba8925e43166bbc21bac4180feb6d2",
+   "size": 6953
+  },
+  "lifecycle.py": {
+   "sha256": "557e34c4a22b70d9000fe106d219dabece36dda02b731da00a50627b66e04c21",
+   "size": 3056
+  },
+  "notify.py": {
+   "sha256": "27573c1392f6839d0bea59bb4ebe1551e45dded1979375404d6c99cad4d2b5f3",
+   "size": 33005
+  },
+  "ops.py": {
+   "sha256": "a9d74c4ce4d20ab1e1610ce07f2492f8dd2e5a970c8d02728e0dc904b1f008e5",
+   "size": 15096
+  },
+  "publication.py": {
+   "sha256": "0048a5a3670e5b059b804d53f0bcb3204ea5630a0309fa195fccbfcd53c8d042",
+   "size": 2624
+  },
+  "settings.py": {
+   "sha256": "ae23468db89aba3777fdf065803ccb8ad1917868490ea912eae7018997b16c04",
+   "size": 17591
+  },
+  "site_monitor.py": {
+   "sha256": "1801747af4768d30b3278d0873e2a5b31bfcba11655466fcaf2a61d0bbb83552",
+   "size": 38461
+  },
+  "start-cloudflare.sh": {
+   "sha256": "344a4a63b7d5095a5f06ac24a16a3bd24420cede4898d74eeb7acc7db915809c",
+   "size": 2741
+  },
+  "start.sh": {
+   "sha256": "d18303bf98e4427fec9bf89083b7b70f58525e89d5d3bc40a17a4ce4d16cae05",
+   "size": 1335
+  },
+  "supervisor.py": {
+   "sha256": "26f9955a67846a9d4536af540d7476e33d71de2cc44e9b30c656fd92379e67c9",
+   "size": 47616
+  },
+  "sysutil.py": {
+   "sha256": "fb07d1485d10364d6b4c5887fd802dfe746a3c452e2cb14aa7e96e3be91afecb",
+   "size": 6405
+  },
+  "tests/e2e/README.md": {
+   "sha256": "d447139c1384ab80d0c5fbe396007cbc20635bf9bfc5d85949724c097d457c4c",
+   "size": 2689
+  },
+  "tests/e2e/adega.js": {
+   "sha256": "cc699797fbec26cb266f53a6e3b227ff76d0d32baab811d699366074ae9f9eae",
+   "size": 12968
+  },
+  "tests/e2e/backups.js": {
+   "sha256": "8172c543ce5ed22295ed737356da12e54a03caf47b3737ed74e45044e41af1fa",
+   "size": 28544
+  },
+  "tests/e2e/fake_meta.py": {
+   "sha256": "2e5dc8f4d29389056913feb8d0049e37fae55e84c2175a7121cffab2dc61c741",
+   "size": 2663
+  },
+  "tests/e2e/fake_smtp.py": {
+   "sha256": "b5766a8a1888fc1c573b5c74901756a0b13a77d2e6e3e3bf9df4c31d8417fbfb",
+   "size": 2746
+  },
+  "tests/e2e/ops.js": {
+   "sha256": "ec35387cdef252fab2502959ae284a66b016c704b698418eb1d3408b0f907681",
+   "size": 41040
+  },
+  "tests/e2e/paginas.js": {
+   "sha256": "bb2a9c445600e65c53f9e4ab49f008ef87af56f31c4754696eba3c7f2328341f",
+   "size": 3718
+  },
+  "tests/e2e/rodar.sh": {
+   "sha256": "15f9a1914b46bed2e5e7fc8780afc2bd9cce535cdfc6383627af850844af7bf2",
+   "size": 6280
+  },
+  "tests/fake_cloudflared.py": {
+   "sha256": "ce0c904ab21450edc582e42d9713866dcef5d24c91458bcceeff005aa3f02940",
+   "size": 3178
+  },
+  "tests/test_apps.py": {
+   "sha256": "b88fcdbf97c6a1a794ef3d9906b352c639d16cdf72acb8c3df9360f189721665",
+   "size": 13595
+  },
+  "tests/test_backup.py": {
+   "sha256": "88393dd7e56140d96e402a88e27d2f5093d5443c5533dd2cc760e733fcece22a",
+   "size": 51523
+  },
+  "tests/test_base30.py": {
+   "sha256": "43cb1ef08f6ddd4c56225e5621014720222d5e15c5d4e4f3debae4f4727bdfc9",
+   "size": 11791
+  },
+  "tests/test_bot.py": {
+   "sha256": "c12b917e232bdf19330f47ab218103fa2d48734bdd8bd1e1fb3ddb8719f29c7e",
+   "size": 17806
+  },
+  "tests/test_catalog.py": {
+   "sha256": "7030ae9bdf08b67ef733a6f713268fc01d6f511b0ab5e213c97734f9a0e217f1",
+   "size": 26645
+  },
+  "tests/test_cdbs.py": {
+   "sha256": "08a7708f365dc7f356d78b8a9eea827562a3558e0f8bfa5ca32d389aecabd14b",
+   "size": 10514
+  },
+  "tests/test_crypto.py": {
+   "sha256": "dd054d912b9914b1f349b6c877af3abd6361ca4e611aa7fc8568bdaffcdd9d0f",
+   "size": 10309
+  },
+  "tests/test_doctor.py": {
+   "sha256": "c7786d7f9d8a2db9456dbc754b8e33929c099adffccc78e63953228b2f085cf0",
+   "size": 12866
+  },
+  "tests/test_email.py": {
+   "sha256": "73f5f3a8186dd92234a08012bc93206934f801c3e8aeb9d162e3befd6189287a",
+   "size": 14436
+  },
+  "tests/test_exclusao.py": {
+   "sha256": "f7804be98ad0f044be26f46958097d14648ce1f1fcbb41bfdaa8460903275ad3",
+   "size": 22759
+  },
+  "tests/test_fixes.py": {
+   "sha256": "277c46d601ff2bedeec9eed6e83ef53c73ae249d95d0ca4b456e57c29c3ca3cc",
+   "size": 11203
+  },
+  "tests/test_monitor.py": {
+   "sha256": "a54f35964392fb94d9d2d8465493a11ec28fe186bc4fc5a32b543d0fb03db335",
+   "size": 17231
+  },
+  "tests/test_notify.py": {
+   "sha256": "47a78838b4254d49b376eeab443960d6d9dc4779c27ab1b2920ad8511d0c34ad",
+   "size": 19543
+  },
+  "tests/test_painel30.py": {
+   "sha256": "484a67d147503c763bbbf6460f5a60229fcf35b02313561e610e5a95724f1186",
+   "size": 18348
+  },
+  "tests/test_protecao.py": {
+   "sha256": "50dc7b8099666517078dc98a79d87f8c49c3c0ab8c7f9ea3f89b673e10f0dc74",
+   "size": 24297
+  },
+  "tests/test_recuperacao.py": {
+   "sha256": "549295c7511bdd55fad82bca048e9074f8e319c8fc3c02b87013c163d2165a58",
+   "size": 31662
+  },
+  "tests/test_scripts.py": {
+   "sha256": "bbaf7b0e64a5cd7abf46db2c67e6f0a34a26bd9ca7d09e16339079dc1464360f",
+   "size": 14784
+  },
+  "tests/test_seguranca21.py": {
+   "sha256": "29ca6561f245ea9b7b1e31f0dea6b4dd07f3c56a2cbf8a11d6fac201a8f7e022",
+   "size": 26920
+  },
+  "tests/test_servico30.py": {
+   "sha256": "a2ba9e84af1d767ac6495b0e60c18042aceda91cc5b0fc19d7f1836b45442d4f",
+   "size": 10960
+  },
+  "tests/test_servidores40.py": {
+   "sha256": "4ddebc356dd3a9c1e8e6dd73ee7f97eb5bcff295d8a659962de91b343cb3c1a1",
+   "size": 12246
+  },
+  "tests/test_supervisor.py": {
+   "sha256": "bb8b5c465bf3d21d450b17b7fc9dacf7f57ed50e1a10c503c3c930bad1e527ca",
+   "size": 21340
+  },
+  "tests/test_updater.py": {
+   "sha256": "517ee4070456952ce2afd38b0405662721f00f373827c4fe8cd2f0fecb1407bc",
+   "size": 15681
+  },
+  "tests/test_whatsapp.py": {
+   "sha256": "404ce05423228f1870cd6352c0f4849f60b96056aed2372b37d63b23aa33f5d6",
+   "size": 15456
+  },
+  "tools/cobertura.py": {
+   "sha256": "22b83c49fad200a9342f65670fded23ca03e0dedee6fbe83544c5d027d44dfc1",
+   "size": 3878
+  },
+  "tools/montar_pacote.py": {
+   "sha256": "d75528d90bf92512de266f70c644d90c6d9cf87773235e8ec7361856cbfdab9f",
+   "size": 1955
+  },
+  "updater.py": {
+   "sha256": "b99e9c36f87fd412c330f5d43b8da4fb7f4d4d2fb7662219f4635aa1bae68cf3",
+   "size": 33109
+  },
+  "versioninfo.py": {
+   "sha256": "fdf5306649ad0cba0fbc11ac600ed9caaf1773cf548a258435c18a460b042868",
+   "size": 3888
+  },
+  "web/admin.js": {
+   "sha256": "ab6467dedc97fa56305c2e0b9133bef7140aa6eea39c3abed1e8fa13c30f72c2",
+   "size": 6591
+  },
+  "web/app.css": {
+   "sha256": "949ad3126af9336a783dbe85ba072809739007598c208559fdfc7ee7f1ece74e",
+   "size": 23355
+  },
+  "web/app.js": {
+   "sha256": "b9d5fd80a00305458b2daae48af270967febed161fff2c1355ea80c3d40d14b2",
+   "size": 17166
+  },
+  "web/apps.js": {
+   "sha256": "802eaaa1f9f4d391c7b3408624fd64fc930a434ef4cee1ac1ccbc36c848e2231",
+   "size": 19601
+  },
+  "web/backups.js": {
+   "sha256": "89e8818b44b8dd4f4adb6eab9023421e499ba772d5df20ae5e8a1b58fd0915b3",
+   "size": 43987
+  },
+  "web/catalog.js": {
+   "sha256": "5c57bc6e2c9c4baf9e321a120486a683806c19c498a9226d07d133787cc1795f",
+   "size": 1844
+  },
+  "web/index.html": {
+   "sha256": "7a9d6627ab3a041df2724a208b1614c5bd204db9fba1fc5a9160185cbae39e38",
+   "size": 33196
+  },
+  "web/nav.js": {
+   "sha256": "d003eb7d8b69a40f50f15eefcfdc02ecd504d1fe8f3dfdc5adb88649ba40033e",
+   "size": 3641
+  },
+  "web/ops.js": {
+   "sha256": "d57f11830e470fb54614d738b49459c4781d1e67e5a2e6e8960f11d1f6298bd3",
+   "size": 26960
+  },
+  "web/system.js": {
+   "sha256": "a706d64414a64ce5a0a4a86cc10ac74f9e5e94d1440f6135277782db0b84d49a",
+   "size": 29172
+  },
+  "whatsapp.py": {
+   "sha256": "4b94b545758af62830aff4317d0ca0322fadf83bb5d130232117358b68e530aa",
+   "size": 18056
+  }
+ }
+}

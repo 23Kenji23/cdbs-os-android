@@ -1,0 +1,94 @@
+<!doctype html>
+<!--
+  EXEMPLO DE REFERÊNCIA — não é um modelo para entregar ao cliente. Mostra só o mínimo:
+  ler o catálogo, filtrar por categoria, montar o botão de WhatsApp e ter o botão escondido
+  do painel do cliente (5 toques no título). O visual é todo seu.
+
+  Para testar: publique este arquivo como index.html com o nome "demo", crie o catálogo "demo"
+  no seu painel, abra o site e toque 5 vezes no título para entrar e cadastrar produtos.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loja</title>
+  <style>
+    body{font-family:system-ui,sans-serif;margin:0;background:#fafafa;color:#111}
+    header{padding:16px;background:#111;color:#fff}
+    nav{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px}
+    nav button{border:1px solid #111;background:#fff;padding:6px 12px;border-radius:999px;cursor:pointer}
+    nav button.on{background:#111;color:#fff}
+    main{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;padding:16px}
+    article{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px #0002}
+    img,.sem-foto{width:100%;aspect-ratio:1;object-fit:cover;background:#eee;display:block}
+    .info{padding:10px}.nome{font-weight:700}.preco{margin:4px 0 8px}
+    a.zap{display:block;text-align:center;background:#25d366;color:#000;text-decoration:none;padding:8px;border-radius:8px;font-weight:700}
+    .esgotado{opacity:.55}.esgotado a.zap{background:#ccc;pointer-events:none}
+  </style>
+</head>
+<body>
+  <header><h1 id="titulo" data-cdbs-admin>Loja</h1></header>   <!-- data-cdbs-admin = ponto secreto -->
+  <nav id="filtros"></nav>
+  <main id="vitrine"></main>
+
+  <script src="/_cdbs/admin.js"></script>     <!-- botão escondido do painel do cliente -->
+  <script src="/_cdbs/catalog.js"></script>   <!-- ajudante para ler os produtos -->
+  <script>
+    const LOJA = 'demo';              // <- o nome do catálogo que você criou no painel (o mesmo do site)
+    let loja, filtro = '';
+
+    function desenhar() {
+      const vitrine = document.getElementById('vitrine');
+      vitrine.replaceChildren();
+      for (const produto of loja.products) {
+        if (filtro && produto.category !== filtro) continue;
+
+        const cartao = document.createElement('article');
+        if (!produto.available) cartao.className = 'esgotado';
+
+        let foto;
+        if (produto.image) { foto = document.createElement('img'); foto.src = produto.image; foto.alt = produto.name; foto.loading = 'lazy'; }
+        else { foto = document.createElement('div'); foto.className = 'sem-foto'; }
+
+        const info = document.createElement('div'); info.className = 'info';
+        const nome = document.createElement('div'); nome.className = 'nome'; nome.textContent = produto.name;       // textContent, nunca innerHTML
+        const preco = document.createElement('div'); preco.className = 'preco'; preco.textContent = CDBS.preco(produto);
+        const zap = document.createElement('a'); zap.className = 'zap'; zap.target = '_blank'; zap.rel = 'noopener';
+        zap.textContent = produto.available ? 'Pedir no WhatsApp' : 'Esgotado';
+        zap.href = CDBS.linkWhatsApp(loja, produto) || '#';
+
+        info.append(nome, preco, zap);
+        cartao.append(foto, info);
+        vitrine.append(cartao);
+      }
+    }
+
+    function desenharFiltros() {
+      const nav = document.getElementById('filtros');
+      nav.replaceChildren();
+      for (const [rotulo, valor] of [['Todos', ''], ...loja.categories.map((c) => [c, c])]) {
+        const botao = document.createElement('button');
+        botao.textContent = rotulo;
+        botao.className = valor === filtro ? 'on' : '';
+        botao.onclick = () => { filtro = valor; desenharFiltros(); desenhar(); };
+        nav.append(botao);
+      }
+    }
+
+    function carregar() {
+      return CDBS.carregar(LOJA).then((dados) => {
+        loja = dados;
+        document.getElementById('titulo').textContent = loja.store.name;
+        desenharFiltros();
+        desenhar();
+      }).catch(() => { document.getElementById('vitrine').textContent = 'Não foi possível carregar os produtos agora.'; });
+    }
+
+    // O cliente fechou o painel depois de mudar algo: atualiza a vitrine sem recarregar a página.
+    // (Sem este trecho o admin.js recarrega a página sozinho, o que também funciona.)
+    window.addEventListener('cdbs:atualizado', (evento) => { evento.preventDefault(); carregar(); });
+
+    carregar();
+  </script>
+</body>
+</html>

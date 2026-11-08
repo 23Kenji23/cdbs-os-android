@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f5f8fc">
+  <title>Painel da loja</title>
+  <link rel="stylesheet" href="/_painel/app.css">
+  <script src="/_painel/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <strong id="storeName">Painel da loja</strong>
+    <div class="top-actions">
+      <a id="viewSite" class="link-button" href="#" target="_blank" rel="noopener noreferrer" hidden>Ver minha loja</a>
+      <button id="logoutButton" class="link-button" type="button" hidden>Sair</button>
+      <button id="closeButton" class="close-button" type="button" hidden>Fechar ✕</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="loginView" class="card login" hidden>
+      <h1>Entrar no painel</h1>
+      <p id="loginIntro" class="muted">Use o nome da loja e a senha que você recebeu.</p>
+      <form id="loginForm">
+        <p id="slugInfo" class="slug-info" hidden>Loja: <strong id="slugName"></strong> <button id="slugChange" class="link-button" type="button">trocar</button></p>
+        <div id="slugField" class="field">
+          <label for="loginSlug">Nome da loja</label>
+          <input id="loginSlug" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+        </div>
+        <label for="loginPassword">Senha</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" autocapitalize="characters" autocorrect="off" spellcheck="false" required>
+        <button id="loginButton" class="primary wide" type="submit">Entrar</button>
+      </form>
+      <p id="loginMessage" class="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="appView" hidden>
+      <div class="intro">
+        <div>
+          <h1>Seus produtos</h1>
+          <p class="muted"><span id="productCount">0</span> cadastrados. O que você salvar aparece na sua loja na hora.</p>
+        </div>
+        <button id="newButton" class="primary" type="button">+ Adicionar produto</button>
+      </div>
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+      <div id="list" class="list"></div>
+      <div id="empty" class="card empty" hidden>
+        <strong>Nenhum produto ainda</strong>
+        <p class="muted">Toque em “Adicionar produto”, tire uma foto, coloque o nome e o preço. Pronto!</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="editor" aria-labelledby="editorTitle">
+    <form id="editorForm" class="editor">
+      <h2 id="editorTitle">Novo produto</h2>
+
+      <div class="photo-row">
+        <img id="photoPreview" class="thumb big" alt="Foto do produto" hidden>
+        <div class="photo-controls">
+          <label class="button secondary" for="photo">Escolher foto</label>
+          <input id="photo" type="file" accept="image/*" class="visually-hidden">
+          <button id="removePhoto" class="link-button danger-text" type="button" hidden>Remover foto</button>
+          <small class="muted">A foto é reduzida automaticamente para carregar rápido.</small>
+        </div>
+      </div>
+
+      <label for="name">Nome do produto</label>
+      <input id="name" maxlength="80" required>
+
+      <label for="price">Preço (R$)</label>
+      <input id="price" inputmode="decimal" placeholder="Ex.: 89,90 (deixe vazio para “consulte”)" maxlength="14">
+
+      <label for="category">Categoria</label>
+      <input id="category" maxlength="40" list="categoryList" placeholder="Ex.: Camisetas">
+      <datalist id="categoryList"></datalist>
+
+      <label for="description">Descrição</label>
+      <textarea id="description" maxlength="500" rows="4" placeholder="Tamanhos, cores, material…"></textarea>
+
+      <label class="check"><input id="available" type="checkbox" checked> Disponível para venda</label>
+
+      <p id="editorMessage" class="message error" role="alert"></p>
+      <div class="editor-actions">
+        <button id="cancelButton" class="secondary" type="button">Cancelar</button>
+        <button id="saveButton" class="primary" type="submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

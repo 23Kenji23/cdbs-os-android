@@ -1,0 +1,64 @@
+:root{color-scheme:light;--ink:#18263a;--muted:#66758b;--blue:#2e70d1;--blue-dark:#205bb5;--blue-soft:#eaf3ff;--line:#e2e9f2;--page:#f5f8fc;--green:#17855f;--red:#b93f4b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+h1{font-size:24px;margin:0;letter-spacing:-.03em}
+h2{font-size:20px;margin:0 0 14px}
+.muted{color:var(--muted);font-size:14px;margin:4px 0 0}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+.topbar strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top-actions{display:flex;gap:14px;align-items:center;flex-shrink:0}
+.link-button{background:none;border:0;padding:6px 0;color:var(--blue-dark);font-size:14px;font-weight:650;text-decoration:none}
+.close-button{min-height:36px;padding:0 12px;border:0;border-radius:9px;background:var(--ink);color:#fff;font-size:14px;font-weight:700}
+.field{display:flex;flex-direction:column}
+.slug-info{margin:16px 0 0;font-size:15px}
+.slug-info .link-button{margin-left:6px;padding:0}
+.danger-text{color:var(--red)}
+
+.shell{width:min(100% - 28px,720px);margin:20px auto 60px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.login{max-width:420px;margin:40px auto 0}
+.login form{display:flex;flex-direction:column;margin-top:18px}
+label{font-size:13px;font-weight:700;margin:14px 0 6px}
+input,textarea{width:100%;border:1px solid #d3deec;border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink)}
+input:focus,textarea:focus{outline:2px solid #9cc1f3;border-color:#6ca0e8}
+input[type=checkbox]{width:20px;height:20px;margin:0}
+.check{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;margin-top:16px}
+
+button.primary,button.secondary,.button{min-height:44px;padding:0 18px;border:0;border-radius:10px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;text-align:center}
+.primary{background:var(--blue);color:#fff}
+.primary:hover{background:var(--blue-dark)}
+.secondary{background:var(--blue-soft);color:var(--blue-dark)}
+.wide{width:100%;margin-top:18px}
+button:disabled{opacity:.6;cursor:wait}
+
+.intro{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.message{min-height:22px;margin:10px 0 0;font-size:14px;color:var(--muted)}
+.message.error{color:var(--red)}
+.message.success{color:var(--green)}
+.list{display:grid;gap:12px;margin-top:8px}
+.empty{text-align:center;padding:34px 18px;margin-top:8px}
+
+.product{display:grid;grid-template-columns:76px 1fr;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
+.thumb{width:76px;height:76px;border-radius:10px;object-fit:cover;background:var(--blue-soft);display:grid;place-items:center;color:var(--blue);font-size:26px}
+.thumb.big{width:96px;height:96px}
+.product-name{font-weight:750;overflow-wrap:anywhere}
+.product-meta{font-size:13px;color:var(--muted)}
+.product-price{font-weight:700;color:var(--ink)}
+.badge{display:inline-block;font-size:11px;font-weight:750;padding:2px 8px;border-radius:999px;background:#e4f6ef;color:var(--green)}
+.badge.off{background:#fff3f3;color:var(--red)}
+.product-actions{grid-column:1 / -1;display:flex;gap:8px;flex-wrap:wrap}
+.product-actions button{flex:1;min-width:92px;min-height:40px;border:0;border-radius:9px;font-size:13px;font-weight:700;background:var(--blue-soft);color:var(--blue-dark)}
+.product-actions .danger{background:#fff3f3;color:var(--red)}
+
+dialog{width:min(100% - 20px,520px);max-height:calc(100dvh - 20px);overflow:auto;border:0;border-radius:18px;padding:20px;color:var(--ink)}
+dialog::backdrop{background:rgba(24,38,58,.45)}
+.photo-row{display:flex;gap:16px;align-items:center}
+.photo-controls{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.editor-actions{display:flex;gap:10px;margin-top:14px}
+.editor-actions button{flex:1}
+.photo-row{margin-bottom:6px}
